@@ -10,4 +10,5 @@ public class GameEndpoint {
         return "MainPage";
     }
 
+
 }
