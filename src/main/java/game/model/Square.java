@@ -1,5 +1,9 @@
 package game.model;
 
+/**
+ * Die Squares markieren die einzelnen Felder vom Spiel. Jedes Feld kann die Schlange, einen Apfel, oder den Körper der
+ * Schlange enthalten.
+ */
 public class Square {
     private boolean isEmpty;
     private boolean hasApple;
