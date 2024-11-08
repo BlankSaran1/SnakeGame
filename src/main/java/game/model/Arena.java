@@ -8,10 +8,12 @@ public class Arena {
     private Square[][] squares;
     private int length;
     private int height;
+
     public Square[][] getSquares() {
         return squares;
     }
-    public Square getASpezificSquare(int height,int length){
+
+    public Square getASpezificSquare(int height, int length) {
         return squares[height][length];
     }
 
@@ -33,5 +35,28 @@ public class Arena {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    /**
+     * Hier wird die erste Instanz der Arena geladen.
+     * Die Daten sind die Startvariablen, damit wir Anfangswerte haben,
+     * wenn das Spiel Startet
+     */
+    public Arena() {
+        this.height=15;
+        this.length=15;
+        squares = new Square[16][16];
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                squares[i][j] =new Square();
+                setSquares(squares);
+            }
+        }
+        squares[8][4].setHasApple(true);
+        squares[4][4].setHasHead(true);
+        squares[2][4].setHasBody(true);
+        squares[3][4].setHasBody(true);
+        squares[1][4].setHasBody(true);
+
     }
 }

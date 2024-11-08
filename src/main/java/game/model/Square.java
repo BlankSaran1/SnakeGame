@@ -13,6 +13,9 @@ public class Square {
      * Vierecke als außerhalb zählen, damit wir einfach ein Rand haben, ohne intern Probleme mit outOfBounds zu haben.
      */
     private boolean isOutOfBounds;
+    private boolean hasHead;
+
+
     private int bodyAge;
 
     public boolean isEmpty() {
@@ -47,11 +50,28 @@ public class Square {
         isOutOfBounds = outOfBounds;
     }
 
+    public boolean isHasHead() {
+        return hasHead;
+    }
+
+    public void setHasHead(boolean hasHead) {
+        this.hasHead = hasHead;
+    }
+
     public int getBodyAge() {
         return bodyAge;
     }
 
     public void setBodyAge(int bodyAge) {
         this.bodyAge = bodyAge;
+    }
+
+    public Square() {
+        this.isEmpty = true;
+        this.hasApple = false;
+        this.hasBody = false;
+        this.isOutOfBounds = false;
+        this.hasHead = false;
+        this.bodyAge = 0;
     }
 }

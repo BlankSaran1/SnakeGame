@@ -42,4 +42,10 @@ public class Snake {
         SnakeLength = snakeLength;
     }
 
+    public Snake() {
+        SnakeLength = 3;
+        SnakeX = 3;
+        SnakeY = 3;
+        SnakeDirection = 2;
+    }
 }
