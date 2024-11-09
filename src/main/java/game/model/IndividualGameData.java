@@ -57,5 +57,17 @@ public class IndividualGameData {
         Arena arena=new Arena();
         setArena(arena);
         Snake snake=new Snake();
+        setSnake(snake);
+    }
+
+    @Override
+    public String toString() {
+        return "IndividualGameData{" +
+                "playerName='" + playerName + '\'' +
+                ", arena=" + arena +
+                ", snake=" + snake +
+                ", ownID=" + ownID +
+                ", isInit=" + isInit +
+                '}';
     }
 }

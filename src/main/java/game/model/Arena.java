@@ -1,5 +1,7 @@
 package game.model;
 
+import java.util.Arrays;
+
 public class Arena {
     /**
      * Hier ist die Idee, dass die Arena ein Zweidimensionales Brett aus Vierecken ist.
@@ -43,8 +45,8 @@ public class Arena {
      * wenn das Spiel Startet
      */
     public Arena() {
-        this.height=15;
-        this.length=15;
+        this.height=16;
+        this.length=16;
         squares = new Square[16][16];
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
@@ -52,11 +54,29 @@ public class Arena {
                 setSquares(squares);
             }
         }
-        squares[8][4].setHasApple(true);
-        squares[4][4].setHasHead(true);
-        squares[2][4].setHasBody(true);
-        squares[3][4].setHasBody(true);
-        squares[1][4].setHasBody(true);
 
+        squares[8][4].setHasApple(true);
+        squares[8][4].setEmpty(false);
+        squares[2][4].setHasBody(true);
+        squares[2][4].setBodyAge(2);
+        squares[1][4].setBodyAge(3);
+
+        squares[3][4].setEmpty(false);
+        squares[1][4].setHasBody(true);
+        squares[2][4].setEmpty(false);
+        squares[3][4].setHasBody(true);
+        squares[3][4].setBodyAge(1);
+
+        squares[1][4].setEmpty(false);
+
+    }
+
+    @Override
+    public String toString() {
+        return "Arena{" +
+                "squares=" + Arrays.toString(squares) +
+                ", length=" + length +
+                ", height=" + height +
+                '}';
     }
 }

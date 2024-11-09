@@ -32,6 +32,7 @@ public class Square {
 
     public void setHasApple(boolean hasApple) {
         this.hasApple = hasApple;
+
     }
 
     public boolean isHasBody() {
@@ -74,4 +75,17 @@ public class Square {
         this.hasHead = false;
         this.bodyAge = 0;
     }
+
+    @Override
+    public String toString() {
+        return "Square{" +
+                "isEmpty=" + isEmpty +
+                ", hasApple=" + hasApple +
+                ", hasBody=" + hasBody +
+                ", isOutOfBounds=" + isOutOfBounds +
+                ", hasHead=" + hasHead +
+                ", bodyAge=" + bodyAge +
+                '}';
+    }
 }
+

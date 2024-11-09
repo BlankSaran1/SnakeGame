@@ -44,8 +44,8 @@ public class Snake {
 
     public Snake() {
         SnakeLength = 3;
-        SnakeX = 3;
-        SnakeY = 3;
-        SnakeDirection = 2;
+        SnakeX = 4;
+        SnakeY = 4;
+        SnakeDirection = 0;
     }
 }
