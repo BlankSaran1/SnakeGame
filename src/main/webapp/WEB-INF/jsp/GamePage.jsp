@@ -13,6 +13,13 @@
     <meta charset="UTF-8">
     <title>Snake Game</title>
     <style>
+        body {
+            background-color: linen;
+            display: grid;
+            width: auto;
+            height: auto;
+        }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(16, 30px);
@@ -37,6 +44,9 @@
         .snake-head {
             background-color: yellow;
         }
+        .is-out-of-Bounds{
+            background-color: blue;
+        }
     </style>
 </head>
 
@@ -56,25 +66,30 @@
         const arena = document.getElementById("gameBoard");
         const squares = arena.getElementsByClassName("square");
         let squareIndex = 0;
+        if(data.arena.gameIsLost){
+            clearInterval(runningGame);
+            window.location.href ="http://localhost:8080/lostGame";
+        }
         for (let length = 0; length < data.arena.length; length++) {
             for (let height = 0; height < data.arena.length; height++) {
-                squares[squareIndex].className="square"
+                squares[squareIndex].className = "square"
                 console.log(data.snake)
-                if(data.arena.squares[height][length].hasApple){
+                console.log(data.arena.squares)
+                if (data.arena.squares[height][length].hasApple) {
                     squares[squareIndex].classList.add("apple");
                     console.log("Added an apple at")
                     console.log(length)
                     console.log(height)
                     console.log(squareIndex)
                 }
-                if(data.arena.squares[height][length].hasBody){
+                if (data.arena.squares[height][length].hasBody) {
                     squares[squareIndex].classList.add("snake-body");
                     console.log("Added a body at")
                     console.log(length)
                     console.log(height)
                     console.log(squareIndex)
                 }
-                if(data.arena.squares[height][length].hasHead) {
+                if (data.arena.squares[height][length].hasHead) {
                     squares[squareIndex].classList.add("snake-head");
                     console.log("Added a head at")
                     console.log(length)
@@ -82,7 +97,16 @@
                     console.log(squareIndex)
 
                 }
-                if(data.snake.snakeY==height&&data.snake.snakeX==length)
+                if (data.arena.squares[height][length].outOfBounds) {
+                    squares[squareIndex].classList.add("is-out-of-Bounds");
+                    console.log("Declaread out of Bounds at")
+                    console.log(length)
+                    console.log(height)
+                    console.log(squareIndex)
+
+                }
+
+                if (data.snake.snakeY == height && data.snake.snakeX == length)
                     squares[squareIndex].classList.add("snake-head")
 
                 squareIndex++;
@@ -91,7 +115,7 @@
     }
 
     function fetchGameUpdate() {
-        const repsonse= fetch("http://localhost:8080/getGameFiles")
+        const repsonse = fetch("http://localhost:8080/getGameFiles")
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -104,23 +128,14 @@
             .catch(error => console.error('Error fetching game update:', error));
     }
 
-    let cellNumber = 0;
 
-    function turnFieldblue() {
-        const grid = document.getElementById("gameBoard");
-        const cells = grid.getElementsByClassName("square");
-        cells[cellNumber].classList.add("snake-body");
-        cellNumber++;
-
-    }
-
-    setInterval(fetchGameUpdate, 500);
+    runningGame=setInterval(fetchGameUpdate, 200);
     let snakeDirection = 0;
 
-    document.addEventListener("keydown", function(event) {
+    document.addEventListener("keydown", function (event) {
         let newDirection = snakeDirection;
 
-        switch(event.key) {
+        switch (event.key) {
             case "ArrowRight":
                 if (snakeDirection !== 2) newDirection = 0;
                 break;
@@ -137,77 +152,95 @@
 
         if (newDirection !== snakeDirection) {
             snakeDirection = newDirection;
-            if(snakeDirection==0){
-
-                fetch("http://localhost:8080/updateDirection", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    body: `direction=0`
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("Failed to update direction on server");
-                        }
-                    })
-                    .catch(error => console.error("Error sending direction update:", error));
-
+            if (snakeDirection == 0) {
+                setDirectionToEast();
             }
-            if(snakeDirection==1){
-
-                fetch("http://localhost:8080/updateDirection", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    body: `direction=1`
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("Failed to update direction on server");
-                        }
-                    })
-                    .catch(error => console.error("Error sending direction update:", error));
-
+            if (snakeDirection == 1) {
+                setDirectionToSouth();
             }
-            if(snakeDirection==2){
-
-                fetch("http://localhost:8080/updateDirection", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    body: `direction=2`
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("Failed to update direction on server");
-                        }
-                    })
-                    .catch(error => console.error("Error sending direction update:", error));
-
+            if (snakeDirection == 2) {
+                setDirectionToWest();
             }
-            if(snakeDirection==3){
-
-                fetch("http://localhost:8080/updateDirection", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    body: `direction=3`
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("Failed to update direction on server");
-                        }
-                    })
-                    .catch(error => console.error("Error sending direction update:", error));
+            if (snakeDirection == 3) {
+                setDirectionToNorth();
 
             }
         }
     });
 
+    function setDirectionToEast() {
+
+        fetch("http://localhost:8080/updateDirection", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `direction=0`
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to update direction on server");
+                }
+            })
+            .catch(error => console.error("Error sending direction update:", error));
+
+
+    }
+
+    function setDirectionToSouth() {
+
+        fetch("http://localhost:8080/updateDirection", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `direction=1`
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to update direction on server");
+                }
+            })
+            .catch(error => console.error("Error sending direction update:", error));
+
+
+    }
+
+    function setDirectionToWest() {
+
+        fetch("http://localhost:8080/updateDirection", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `direction=2`
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to update direction on server");
+                }
+            })
+            .catch(error => console.error("Error sending direction update:", error));
+
+
+    }
+
+    function setDirectionToNorth() {
+        fetch("http://localhost:8080/updateDirection", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `direction=3`
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to update direction on server");
+                }
+            })
+            .catch(error => console.error("Error sending direction update:", error));
+
+    }
 </script>
 
 </body>

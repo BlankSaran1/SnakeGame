@@ -4,7 +4,6 @@ import game.model.Arena;
 import game.model.Snake;
 
 import java.util.Random;
-import java.util.random.*;
 
 public class SnakeGameLogic {
     /**
@@ -21,7 +20,7 @@ public class SnakeGameLogic {
                 if (arena.getASpezificSquare(i, j).getBodyAge() > snake.getSnakeLength()) {
                     arena.getASpezificSquare(i, j).setBodyAge(0);
                     arena.getASpezificSquare(i, j).setHasBody(false);
-                    arena.getASpezificSquare(i, j).setEmpty(true);
+                    arena.getASpezificSquare(i, j).setHasNoContent(true);
                 }
             }
 
@@ -51,7 +50,7 @@ public class SnakeGameLogic {
                 int nextApple = random.nextInt(256) + 1;
                 int yKordsNextApple = (int) (nextApple / 16);
                 int xKordsNextApple = nextApple - (yKordsNextApple * 16);
-                if (arena.getASpezificSquare(yKordsNextApple, xKordsNextApple).isEmpty()) {
+                if (arena.getASpezificSquare(yKordsNextApple, xKordsNextApple).isHasNoContent()) {
                     if (yKordsNextApple == snake.getSnakeY() && xKordsNextApple == snake.getSnakeX()) {
 
                     } else {
@@ -77,7 +76,7 @@ public class SnakeGameLogic {
 
     public void checkForGameEnd(Arena arena, Snake snake) {
         if (arena.getASpezificSquare(snake.getSnakeY(), snake.getSnakeX()).isHasBody() | arena.getASpezificSquare(snake.getSnakeY(), snake.getSnakeX()).isOutOfBounds()) {
-            //TODO:Spielende Implementieren, falls der Spieler die Wand oder den Körper berührt
+            arena.setGameIsLost(true);
         }
     }
 

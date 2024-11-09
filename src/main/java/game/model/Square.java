@@ -5,7 +5,7 @@ package game.model;
  * Schlange enthalten.
  */
 public class Square {
-    private boolean isEmpty;
+    private boolean hasNoContent;
     private boolean hasApple;
     private boolean hasBody;
     /**
@@ -18,12 +18,12 @@ public class Square {
 
     private int bodyAge;
 
-    public boolean isEmpty() {
-        return isEmpty;
+    public boolean isHasNoContent() {
+        return hasNoContent;
     }
 
-    public void setEmpty(boolean empty) {
-        isEmpty = empty;
+    public void setHasNoContent(boolean hasNoContent) {
+        this.hasNoContent = hasNoContent;
     }
 
     public boolean isHasApple() {
@@ -68,7 +68,7 @@ public class Square {
     }
 
     public Square() {
-        this.isEmpty = true;
+        this.hasNoContent = true;
         this.hasApple = false;
         this.hasBody = false;
         this.isOutOfBounds = false;
@@ -79,7 +79,7 @@ public class Square {
     @Override
     public String toString() {
         return "Square{" +
-                "isEmpty=" + isEmpty +
+                "isEmpty=" + hasNoContent +
                 ", hasApple=" + hasApple +
                 ", hasBody=" + hasBody +
                 ", isOutOfBounds=" + isOutOfBounds +

@@ -10,6 +10,15 @@ public class Arena {
     private Square[][] squares;
     private int length;
     private int height;
+    private boolean gameIsLost;
+
+    public boolean isGameIsLost() {
+        return gameIsLost;
+    }
+
+    public void setGameIsLost(boolean gameIsLost) {
+        this.gameIsLost = gameIsLost;
+    }
 
     public Square[][] getSquares() {
         return squares;
@@ -52,22 +61,27 @@ public class Arena {
             for (int j = 0; j < 16; j++) {
                 squares[i][j] =new Square();
                 setSquares(squares);
+                if(i==0||j==0||i==15||j==15){
+                    squares[i][j].setOutOfBounds(true);
+                    squares[i][j].setHasNoContent(false);
+
+                }
             }
         }
 
-        squares[8][4].setHasApple(true);
-        squares[8][4].setEmpty(false);
+        squares[1][1].setHasApple(true);
+        squares[8][4].setHasNoContent(false);
         squares[2][4].setHasBody(true);
         squares[2][4].setBodyAge(2);
         squares[1][4].setBodyAge(3);
 
-        squares[3][4].setEmpty(false);
+        squares[3][4].setHasNoContent(false);
         squares[1][4].setHasBody(true);
-        squares[2][4].setEmpty(false);
+        squares[2][4].setHasNoContent(false);
         squares[3][4].setHasBody(true);
         squares[3][4].setBodyAge(1);
 
-        squares[1][4].setEmpty(false);
+        squares[1][4].setHasNoContent(false);
 
     }
 
@@ -79,4 +93,6 @@ public class Arena {
                 ", height=" + height +
                 '}';
     }
+
+
 }

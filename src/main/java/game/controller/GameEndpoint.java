@@ -22,10 +22,13 @@ public class GameEndpoint {
 
     @GetMapping("/")
     public String mainPage() {
-        return "MainPage";
+        return "StartingPage";
     }
 
+    @GetMapping("/startGame")
+    public String startingPage(){return "StartingGame";}
     @GetMapping("/init")
+
     public String initialize(Model model, @RequestParam(value = "playername", defaultValue = "player") String player) {
 
 
@@ -36,6 +39,14 @@ public class GameEndpoint {
         individualGameData.setInit(true);
 
         return "GamePage";
+    }
+
+    @GetMapping("/lostGame")
+    public String lostGame(Model model) {
+        IndividualGameData individualGameData = gameID.get(counter.get());
+        model.addAttribute("data",individualGameData);
+
+        return "LostGame";
     }
 
     @GetMapping("/getGameFiles")
@@ -49,6 +60,7 @@ public class GameEndpoint {
         snakeGameTurn.gameTurn(individualGameData.getArena(), individualGameData.getSnake());
         return individualGameData;
     }
+
     @PostMapping("/updateDirection")
     public void updateDirection(@RequestParam int direction) {
         gameID.get(counter.get()).getSnake().setSnakeDirection(direction);
