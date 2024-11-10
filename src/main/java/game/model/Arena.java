@@ -11,6 +11,24 @@ public class Arena {
     private int length;
     private int height;
     private boolean gameIsLost;
+    private boolean edgeRules;
+    private int gameSpeed;
+
+    public boolean isEdgeRules() {
+        return edgeRules;
+    }
+
+    public void setEdgeRules(boolean edgeRules) {
+        this.edgeRules = edgeRules;
+    }
+
+    public int getGameSpeed() {
+        return gameSpeed;
+    }
+
+    public void setGameSpeed(int gameSpeed) {
+        this.gameSpeed = gameSpeed;
+    }
 
     public boolean isGameIsLost() {
         return gameIsLost;
@@ -53,7 +71,9 @@ public class Arena {
      * Die Daten sind die Startvariablen, damit wir Anfangswerte haben,
      * wenn das Spiel Startet
      */
-    public Arena() {
+    public Arena(boolean edgeRules,int gameSpeed) {
+        this.edgeRules=edgeRules;
+        this.gameSpeed=gameSpeed;
         this.height=16;
         this.length=16;
         squares = new Square[16][16];

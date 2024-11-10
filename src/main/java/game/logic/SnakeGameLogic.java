@@ -50,7 +50,7 @@ public class SnakeGameLogic {
                 int nextApple = random.nextInt(256) + 1;
                 int yKordsNextApple = (int) (nextApple / 16);
                 int xKordsNextApple = nextApple - (yKordsNextApple * 16);
-                if (arena.getASpezificSquare(yKordsNextApple, xKordsNextApple).isHasNoContent()) {
+                if (arena.getASpezificSquare(yKordsNextApple, xKordsNextApple).isHasNoContent()&&!arena.getASpezificSquare(yKordsNextApple,xKordsNextApple).isHasBody()) {
                     if (yKordsNextApple == snake.getSnakeY() && xKordsNextApple == snake.getSnakeX()) {
 
                     } else {
@@ -75,9 +75,34 @@ public class SnakeGameLogic {
     }
 
     public void checkForGameEnd(Arena arena, Snake snake) {
-        if (arena.getASpezificSquare(snake.getSnakeY(), snake.getSnakeX()).isHasBody() | arena.getASpezificSquare(snake.getSnakeY(), snake.getSnakeX()).isOutOfBounds()) {
+        if (arena.getASpezificSquare(snake.getSnakeY(), snake.getSnakeX()).isHasBody()) {
             arena.setGameIsLost(true);
         }
+        if (arena.getASpezificSquare(snake.getSnakeY(), snake.getSnakeX()).isOutOfBounds()) {
+            if (arena.isEdgeRules()) {
+                arena.setGameIsLost(true);
+
+            }
+            if(!arena.isEdgeRules()){
+                teleportSnake(snake);
+            }
+        }
+    }
+
+    public void teleportSnake(Snake snake) {
+        if(snake.getSnakeY()==0){
+            snake.setSnakeY(14);
+        }
+        if(snake.getSnakeX()==0){
+            snake.setSnakeX(14);
+        }
+        if(snake.getSnakeY()==15){
+            snake.setSnakeY(0);
+        }
+        if(snake.getSnakeX()==15){
+            snake.setSnakeX(0);
+        }
+
     }
 
 

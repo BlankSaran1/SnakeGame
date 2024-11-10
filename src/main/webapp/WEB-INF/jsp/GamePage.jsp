@@ -129,7 +129,7 @@
     }
 
 
-    runningGame=setInterval(fetchGameUpdate, 200);
+    runningGame=setInterval(fetchGameUpdate, ${data.arena.gameSpeed});
     let snakeDirection = 0;
 
     document.addEventListener("keydown", function (event) {

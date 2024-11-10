@@ -10,6 +10,8 @@ public class IndividualGameData {
     private Snake snake;
     private long ownID;
     private boolean isInit;
+    private boolean edgeRules;
+    private int gameSpeed;
 
     public String getPlayerName() {
         return playerName;
@@ -51,12 +53,14 @@ public class IndividualGameData {
         isInit = init;
     }
 
-    public IndividualGameData(String playerName, long id) {
+    public IndividualGameData(String playerName, long id, int gameSpeed, boolean edgeRules) {
+        this.gameSpeed = gameSpeed;
+        this.edgeRules = edgeRules;
         this.playerName = playerName;
         setOwnID(id);
-        Arena arena=new Arena();
+        Arena arena = new Arena(edgeRules, gameSpeed);
         setArena(arena);
-        Snake snake=new Snake();
+        Snake snake = new Snake();
         setSnake(snake);
     }
 

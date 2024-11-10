@@ -26,14 +26,17 @@ public class GameEndpoint {
     }
 
     @GetMapping("/startGame")
-    public String startingPage(){return "StartingGame";}
+    public String startingPage() {
+        return "StartingGame";
+    }
+
     @GetMapping("/init")
 
-    public String initialize(Model model, @RequestParam(value = "playername", defaultValue = "player") String player) {
+    public String initialize(Model model, @RequestParam(value = "playername", defaultValue = "Gastspieler") String player, @RequestParam(value = "gameSpeed", defaultValue = "300") int gameSpeed, @RequestParam(value = "edgeRules", defaultValue = "true") boolean edgeRules) {
 
 
         Long id = counter.incrementAndGet();
-        IndividualGameData individualGameData = new IndividualGameData(player, id);
+        IndividualGameData individualGameData = new IndividualGameData(player, id, gameSpeed, edgeRules);
         gameID.put(id, individualGameData);
         model.addAttribute("data", individualGameData);
         individualGameData.setInit(true);
@@ -44,7 +47,7 @@ public class GameEndpoint {
     @GetMapping("/lostGame")
     public String lostGame(Model model) {
         IndividualGameData individualGameData = gameID.get(counter.get());
-        model.addAttribute("data",individualGameData);
+        model.addAttribute("data", individualGameData);
 
         return "LostGame";
     }

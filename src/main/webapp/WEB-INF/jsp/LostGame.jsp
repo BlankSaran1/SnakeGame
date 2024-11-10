@@ -52,17 +52,27 @@ h1{
     </style>
 </head>
 <body>
-<h1>Du hast verloren</h1>
+<h1>${data.playerName} du hast verloren</h1>
 <br>
 <br>
 <br>
 <br>
 <h1>Schlangenlänge: ${data.snake.snakeLength}</h1>
 <form action="/init">
+    <input type="hidden" name="edgeRules" value="${data.arena.edgeRules}">
+    <input type="hidden" name="Player" value="${data.playerName}">
+    <input type="hidden" name="gameSpeed" value="${data.arena.gameSpeed}">
+
     <div class="form-submit-button">
     <input type="submit" name="nochmal" value="nochmal">
     </div>
 </form>
+<form action="/startGame">
+    <div class="form-submit-button">
+        <input type="submit" name="zurück zur Hauptseite" value="zurück zur Hauptseite">
+    </div>
+</form>
+
 <script>
 </script>
 </body>

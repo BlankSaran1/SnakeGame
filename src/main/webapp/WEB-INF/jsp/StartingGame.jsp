@@ -28,8 +28,27 @@
             left: 40%;
             text-align: center;
             vertical-align: center;
-            font-size: 80px;
+            font-size: 40px;
         }
+
+        .SpeedInput {
+            position: absolute;
+            top: 35%;
+            left: 20%;
+            text-align: center;
+            vertical-align: center;
+            font-size: 20px;
+        }
+
+        .WallInput {
+            position: absolute;
+            top: 35%;
+            left: 60%;
+            text-align: center;
+            vertical-align: center;
+            font-size: 20px;
+        }
+
 
         .Player1Input span {
             text-align: right;
@@ -38,7 +57,7 @@
 
         .StartGameButton {
             position: absolute;
-            top: 50%;
+            top: 60%;
             left: 45%;
             background: #997df5;
             border-style: outset;
@@ -75,8 +94,26 @@
     <form action="/init">
         <label>
             <div class="PlayerInput">
-                <input type="text" name="player" placeholder="player">
+                <input type="text" name="player" placeholder="Name">
             </div>
+            <div class="WallInput">
+                <select name="edgeRules">
+                    <option value="false" name="false">Mit offener Wand</option>
+                    <option value="true" name="true">Mit geschlossener Wand</option>
+                </select>
+
+            </div>
+            <div class="SpeedInput">
+                Spielgeschwindigkeit
+                <select name="gameSpeed">
+                    <option value="100" name="100">ultra</option>
+                    <option value="200" name="200">schnell</option>
+                    <option value="300" name="300">normal</option>
+                    <option value="400" name="400">langsam</option>
+                </select>
+
+            </div>
+
 
             <br>
             <div class="StartGameButton">
