@@ -94,7 +94,7 @@
     <form action="/init">
         <label>
             <div class="PlayerInput">
-                <input type="text" name="player" placeholder="Name">
+                <input type="text" name="playername" placeholder="Name">
             </div>
             <div class="WallInput">
                 <select name="edgeRules">

@@ -60,7 +60,7 @@ h1{
 <h1>Schlangenlänge: ${data.snake.snakeLength}</h1>
 <form action="/init">
     <input type="hidden" name="edgeRules" value="${data.arena.edgeRules}">
-    <input type="hidden" name="Player" value="${data.playerName}">
+    <input type="hidden" name="playername" value="${data.playerName}">
     <input type="hidden" name="gameSpeed" value="${data.arena.gameSpeed}">
 
     <div class="form-submit-button">
